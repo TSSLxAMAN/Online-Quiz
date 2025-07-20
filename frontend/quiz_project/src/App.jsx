@@ -6,6 +6,8 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Dashboard from './components/Dashboard';
 import RequireAuth from './components/RequireAuth';
+import Register from './components/Register';
+import EmailConfirmed from './components/EmailConfirmed';
 
 function App() {
   const route = createBrowserRouter(
@@ -27,10 +29,22 @@ function App() {
             )
           },
           {
+            path: "register",
+            element: (
+              <Register />
+            )
+          },
+          {
+            path: "email-confirmed",
+            element: (
+              <EmailConfirmed />
+            )
+          },
+          {
             path: "dashboard",
             element: (
               <RequireAuth>
-                <Dashboard/>
+                <Dashboard />
               </RequireAuth>
             )
           },

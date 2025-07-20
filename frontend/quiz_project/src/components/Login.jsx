@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setCredentials } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -18,6 +22,7 @@ const Login = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
+
             navigate('/Dashboard');
         }
     }, [isAuthenticated, navigate]);
@@ -50,47 +55,101 @@ const Login = () => {
     };
 
     return (
-        <div className='flex justify-center items-center h-123'>
-            <div>
-                <p className='text-3xl mb-2 text-green-800 font-bold'>Admin Login</p>
-                <div className='shadow-2xl p-8 rounded-2xl border-2 border-green-700 w-[320px]'>
-                    <form onSubmit={handleLogin}>
-                        <TextField
-                            label="Email"
-                            variant="outlined"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            autoComplete="off"
-                            color="success"
-                            fullWidth
-                            sx={{ marginBottom: "16px" }}
-                        />
-                        <TextField
-                            label="Password"
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            autoComplete="current-password"
-                            color="success"
-                            fullWidth
-                            sx={{ marginBottom: "16px" }}
-                        />
-                        <Button
-                            variant="contained"
-                            color="success"
-                            type="submit"
-                            fullWidth
-                            disabled={loading}
-                        >
-                            {loading ? 'Logging in...' : 'Login'}
-                        </Button>
-                        {error && <p className="text-red-600 mt-2">{error}</p>}
-                    </form>
-                </div>
-            </div>
-        </div>
+        <Box
+            sx={{
+                minHeight: '100vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 2,
+                minWidth: '123px'
+            }}
+        >
+            <Paper
+                elevation={24}
+                sx={{
+                    maxWidth: 600,
+                    width: '100%',
+                    p: 4,
+                    borderRadius: 3,
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    backdropFilter: 'blur(10px)'
+                }}
+            >
+                <Box textAlign="center" mb={3}>
+                    <Typography variant="h4" component="h1" sx={{
+                        fontWeight: 'bold',
+                        background: 'linear-gradient(45deg, #2E7D32, #4CAF50)',
+                        backgroundClip: 'text',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        mb: 1
+                    }}>
+                        Login
+                    </Typography>
+                    <Typography variant="subtitle1" color="text.secondary">
+                        Login to your account using cour credentials
+                    </Typography>
+                </Box>
+
+                <Box component="form" onSubmit={handleLogin}>
+                    <Grid spacing={3}>
+
+                        <Grid item xs={12} sx={{ mb: 2 }}>
+                            <TextField
+                                label="Email"
+                                variant="outlined"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                autoComplete="off"
+                                color="success"
+                                fullWidth
+                                sx={{ marginBottom: "16px" }}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sx={{ mb: 2 }}>
+                            <TextField
+                                label="Password"
+                                type="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                autoComplete="current-password"
+                                color="success"
+                                fullWidth
+                                sx={{ marginBottom: "16px" }}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sx={{ mb: 2 }}>
+                            <Button
+                                variant="contained"
+                                color="success"
+                                type="submit"
+                                fullWidth
+                                disabled={loading}
+                                sx={{
+                                    py: 1.5,
+                                    background: 'linear-gradient(45deg, #2E7D32, #4CAF50)',
+                                    '&:hover': {
+                                        background: 'linear-gradient(45deg, #1B5E20, #2E7D32)',
+                                    },
+                                    fontSize: '1.1rem',
+                                    fontWeight: 'bold',
+                                    textTransform: 'none',
+                                    borderRadius: 2
+                                }}
+                            >
+                                {loading ? 'Logging in...' : 'Login'}
+                            </Button>
+                            {error && <p className="text-red-600 mt-2 text-sm">{error}</p>}
+                        </Grid>
+                    </Grid>
+                </Box>
+            </Paper >
+        </Box >
     );
 };
 

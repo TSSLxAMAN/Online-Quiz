@@ -1,0 +1,9 @@
+Hello!
+
+You're receiving this email because {{ user.email }} has been used to register an account on our site.
+
+To confirm this is correct, please click on the link below:
+
+{{ activate_url }}
+
+Thank you!

@@ -35,6 +35,21 @@ const Navbar = () => {
           Home
         </NavLink>
 
+        {!isAuthenticated && (<>
+
+          <NavLink
+            to="/register"
+            className={({ isActive }) =>
+              `px-5 py-3 rounded text-lg transition-all font-semibold ${isActive ? 'bg-green-900 text-white' : 'bg-green-800 hover:bg-green-900 text-white cursor-pointer'
+              }`
+            }
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Register
+          </NavLink>
+
+        </>)}
+
         {isAuthenticated ? (
           <>
             <NavLink
@@ -46,13 +61,13 @@ const Navbar = () => {
             >
               Dashboard
             </NavLink>
-          <button
-            onClick={handleLogout}
+            <button
+              onClick={handleLogout}
               className="px-5 py-2 rounded text-lg font-semibold bg-red-600 hover:bg-red-700 text-white transition-all cursor-pointer"
             >
-            Logout
-          </button>
-            </>
+              Logout
+            </button>
+          </>
         ) : (
           <NavLink
             to="/login"
@@ -86,7 +101,7 @@ const Navbar = () => {
 
       {/* Mobile menu items */}
       {isMenuOpen && (
-        <div className="absolute top-16 left-0 w-full flex flex-col gap-4 p-4 bg-green-700 shadow-md md:hidden">
+        <div className="absolute top-16 left-0 w-full flex flex-col gap-4 p-4 z-10 bg-green-700 shadow-md md:hidden">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -96,6 +111,17 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             Home
+          </NavLink>
+
+          <NavLink
+            to="/register"
+            className={({ isActive }) =>
+              `px-5 py-3 rounded text-lg transition-all font-semibold ${isActive ? 'bg-green-900 text-white' : 'bg-green-800 hover:bg-green-900 text-white cursor-pointer'
+              }`
+            }
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Register
           </NavLink>
 
           {isAuthenticated ? (

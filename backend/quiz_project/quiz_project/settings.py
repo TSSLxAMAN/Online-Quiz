@@ -46,7 +46,7 @@ ROOT_URLCONF = 'quiz_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/ 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -98,7 +98,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'adminpanel.AdminUser'
+AUTH_USER_MODEL = 'adminpanel.StudentUser'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
@@ -127,8 +127,32 @@ REST_AUTH = {
     'JWT_AUTH_HTTPONLY': False,
     'SESSION_LOGIN': False,
     'OLD_PASSWORD_FIELD_ENABLED' : True,
+    'REGISTER_SERIALIZER': 'adminpanel.serializers.StudentRegisterSerializer',
+    'LOGIN_SERIALIZER': 'adminpanel.serializers.CustomLoginSerializer',
 }
+
 JWT_AUTH_COOKIE = 'quiz-auth'
 
 ACCOUNT_LOGIN_METHODS = {'email'}
-ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ramdomlassi@gmail.com'
+EMAIL_HOST_PASSWORD = 'blbc zprb gpgl qald'
+
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_CONFIRMATION_HMAC = False
+
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "http://localhost:5173/email-confirmed"
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "http://localhost:5173/email-confirmed"
+
